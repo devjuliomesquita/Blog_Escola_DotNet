@@ -1,7 +1,14 @@
+using Blog_Escola.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//Criado caminho para a string de conecxão
+var connectionStrings = builder.Configuration.GetConnectionString("DefaultConection");
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionStrings));
 
 var app = builder.Build();
 
