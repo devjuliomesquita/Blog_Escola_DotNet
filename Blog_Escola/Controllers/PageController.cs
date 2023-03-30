@@ -16,5 +16,9 @@ namespace Blog_Escola.Controllers
         {
             return View();
         }
+        public IActionResult Teste()
+        {
+            return View();
+        }
     }
 }
