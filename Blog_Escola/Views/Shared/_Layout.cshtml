@@ -27,9 +27,10 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto py-4 py-lg-0">
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" asp-controller="Page" asp-action="About">About</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" asp-controller="Page" asp-action="Contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" asp-controller="Page" asp-action="About">Sobre</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" asp-controller="Page" asp-action="Contact">Contato</a></li>
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" asp-controller="Page" asp-action="Privacy">Privacy</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" asp-controller="User" asp-action="Login" asp-area="Admin">Login</a></li>
                 </ul>
             </div>
         </div>
@@ -41,34 +42,52 @@
     <footer class="border-top">
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="col-lg-8 col-md-10 mx-auto">
                     <ul class="list-inline text-center">
                         <li class="list-inline-item">
                             <a href="#!">
                                 <span class="fa-stack fa-lg">
-                                    <i class="fas fa-circle fa-stack-2x"></i>
-                                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                                    @*<i class="fas fa-circle fa-stack"></i>*@
+                                    <i class="fab fa-github fa-stack-1x "></i>
                                 </span>
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <a href="#!">
                                 <span class="fa-stack fa-lg">
-                                    <i class="fas fa-circle fa-stack-2x"></i>
-                                    <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                                    @*<i class="fas fa-circle fa-stack"></i>*@
+                                    <i class="fab fa-linkedin fa-stack-1x "></i>
                                 </span>
                             </a>
                         </li>
                         <li class="list-inline-item">
                             <a href="#!">
                                 <span class="fa-stack fa-lg">
-                                    <i class="fas fa-circle fa-stack-2x"></i>
-                                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                    @*<i class="fas fa-circle fa-stack"></i>*@
+                                    <i class="fab fa-whatsapp fa-stack-1x "></i>
                                 </span>
                             </a>
                         </li>
+                        <li class="list-inline-item">
+                            <a href="#!">
+                                <span class="fa-stack fa-lg">
+                                    @*<i class="fas fa-circle fa-stack"></i>*@
+                                    <i class="fab fa-envelope fa-stack-1x "></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#!">
+                                <span class="fa-stack fa-lg">
+                                    @*<i class="fas fa-circle fa-stack"></i>*@
+                                    <i class="fab fa-face fa-stack-1x "></i>
+                                </span>
+                            </a>
+                        </li>
+                        
                     </ul>
-                    <div class="small text-center text-muted fst-italic">Copyright &copy; Your Website 2023</div>
+                    <h5 class="text-center m-2">Veja mais sobre o criador deste Web Site</h5>
+                    <div class="small text-center text-muted fst-italic">Copyright &copy; Escola DOTNET @DateTime.Now.Year</div>
                 </div>
             </div>
         </div>
