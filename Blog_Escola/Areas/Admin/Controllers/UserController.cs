@@ -30,7 +30,12 @@ namespace Blog_Escola.Areas.Admin.Controllers
         [HttpGet("Login")]
         public IActionResult Login()
         {
-            return View(new LoginVM());
+            if (!HttpContext.User.Identity!.IsAuthenticated)
+            {
+                return View(new LoginVM());
+            }
+            return RedirectToAction("Index", "User", new {area = "Admin"});
+            
         }
         [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginVM loginVM)
@@ -52,6 +57,12 @@ namespace Blog_Escola.Areas.Admin.Controllers
             _iNotyfService.Success("Login realizado com sucesso");
             return RedirectToAction("Index", "User", new { area = "Admin"});
         }
-
+        [HttpPost]
+        public IActionResult Logout()
+        {
+            _signInManager.SignOutAsync();
+            _iNotyfService.Success("Usuário deslogado.");
+            return RedirectToAction("Index", "Home", new {area = ""});
+        }
     }
 }
