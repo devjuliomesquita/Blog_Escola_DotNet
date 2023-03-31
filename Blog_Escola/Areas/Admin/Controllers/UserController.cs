@@ -38,6 +38,12 @@ namespace Blog_Escola.Areas.Admin.Controllers
             }).ToList();
             return View(usersVM);
         }
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View( new RegisterVM());
+        }
         [HttpGet("Login")]
         public IActionResult Login()
         {
