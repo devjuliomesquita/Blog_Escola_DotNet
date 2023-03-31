@@ -20,8 +20,14 @@ builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
-
+//Inserindo as Notificações 
 builder.Services.AddNotyf(config => { config.DurationInSeconds = 10; config.IsDismissable = true; config.Position = NotyfPosition.BottomRight; });
+
+//Bloqueio de tela ADMIN sem login
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Login";
+});
 
 var app = builder.Build();
 //Criando initialize

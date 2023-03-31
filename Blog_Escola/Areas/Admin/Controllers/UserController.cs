@@ -1,6 +1,7 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Blog_Escola.Models;
 using Blog_Escola.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -23,9 +24,19 @@ namespace Blog_Escola.Areas.Admin.Controllers
             _signInManager = signInManager;
             _iNotyfService = iNotyfService;
         }
-        public IActionResult Index()
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var users = await _userManager.Users.ToListAsync();
+            var usersVM = users.Select(u => new UserVM()
+            {
+                Id = u.Id,
+                FirstName = u.FirstName,
+                LastName = u.LastName,
+                UserName = u.UserName,
+            }).ToList();
+            return View(usersVM);
         }
         [HttpGet("Login")]
         public IActionResult Login()
