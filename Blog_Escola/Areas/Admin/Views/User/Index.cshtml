@@ -32,7 +32,10 @@
                             <td>@user.Email</td>
                             <td>@user.Role</td>
                             <td>
-                                <a  class="btn btn-secondary">Mudar a senha</a>
+                                <a  class="btn btn-secondary"
+                                    asp-action="ResetPassword"
+                                    asp-controller="User"
+                                    asp-route-id="@user.Id">Mudar a senha</a>
                             </td>
                         </tr>
                     }

@@ -49,6 +49,47 @@ namespace Blog_Escola.Areas.Admin.Controllers
         }
         [Authorize(Roles = "Admin")]
         [HttpGet]
+        public async Task<IActionResult> ResetPassword(string id)
+        {
+            var existingUser = await _userManager.FindByIdAsync(id);
+            if (existingUser == null)
+            {
+                _iNotyfService.Error("Usuário não encontrado.");
+                return View();
+            }
+            var resetPasswordUser = new ResetPasswordIM() 
+            { 
+                Id = existingUser.Id,
+                UserName = existingUser.UserName,
+            };
+            return View(resetPasswordUser);
+
+        }
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetPasswordIM resetPasswordIM)
+        {
+            //Checar se o formulário é válido
+            if (!ModelState.IsValid) { return View(resetPasswordIM); }
+            //Checar a existência desse usuário
+            var existingUser = await _userManager.FindByIdAsync(resetPasswordIM.Id);
+            if(existingUser == null)
+            {
+                _iNotyfService.Error("Usuário não encontrado.");
+                return View(resetPasswordIM);
+            }
+            //Criando as variáveis para realizar o update
+            var token = await _userManager.GeneratePasswordResetTokenAsync(existingUser);
+            var resultResetPassword = await _userManager.ResetPasswordAsync(existingUser, token, resetPasswordIM.NewPassword);
+            if(resultResetPassword.Succeeded)
+            {
+                _iNotyfService.Success("Senha Alterada com Sucesso.");
+                return RedirectToAction(nameof(Index));
+            }
+            return View(resetPasswordIM);
+        }
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
         public IActionResult Register()
         {
             return View( new RegisterVM());
