@@ -36,7 +36,15 @@ namespace Blog_Escola.Areas.Admin.Controllers
                 FirstName = u.FirstName,
                 LastName = u.LastName,
                 UserName = u.UserName,
+                Email = u.Email,
             }).ToList();
+
+            foreach (var user in usersVM)
+            {
+                var singleUser = await _userManager.FindByIdAsync(user.Id);
+                var role = await _userManager.GetRolesAsync(singleUser);
+                user.Role = role.FirstOrDefault();
+            }
             return View(usersVM);
         }
         [Authorize(Roles = "Admin")]
