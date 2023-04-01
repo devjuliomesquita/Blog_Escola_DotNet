@@ -6,9 +6,9 @@ namespace Blog_Escola.ViewModels
     {
         public string? Id { get; set; }
         public string? UserName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "O Preenchimento Obrigatório.")]
         public string? NewPassword { get; set; }
-        [Required]
+        [Required(ErrorMessage = "O Preenchimento Obrigatório.")]
         [Compare(nameof(NewPassword))]
         public string? ConfirmPassword { get; set; }
 
