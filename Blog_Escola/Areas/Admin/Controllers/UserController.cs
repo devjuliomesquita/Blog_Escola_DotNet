@@ -25,6 +25,7 @@ namespace Blog_Escola.Areas.Admin.Controllers
             _signInManager = signInManager;
             _iNotyfService = iNotyfService;
         }
+
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -47,6 +48,7 @@ namespace Blog_Escola.Areas.Admin.Controllers
             }
             return View(usersVM);
         }
+
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> ResetPassword(string id)
@@ -65,6 +67,7 @@ namespace Blog_Escola.Areas.Admin.Controllers
             return View(resetPasswordUser);
 
         }
+
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> ResetPassword(ResetPasswordIM resetPasswordIM)
@@ -88,12 +91,14 @@ namespace Blog_Escola.Areas.Admin.Controllers
             }
             return View(resetPasswordIM);
         }
+
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Register()
         {
             return View( new RegisterVM());
         }
+
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Register(RegisterVM registerVM)
@@ -147,7 +152,7 @@ namespace Blog_Escola.Areas.Admin.Controllers
             {
                 return View(new LoginVM());
             }
-            return RedirectToAction("Index", "User", new {area = "Admin"});
+            return RedirectToAction("Index", "Post", new {area = "Admin"});
             
         }
         [HttpPost("Login")]
@@ -168,14 +173,20 @@ namespace Blog_Escola.Areas.Admin.Controllers
             }
             await _signInManager.PasswordSignInAsync(loginVM.Username, loginVM.Password, loginVM.RememberMe, true);
             _iNotyfService.Success("Login realizado com sucesso");
-            return RedirectToAction("Index", "User", new { area = "Admin"});
+            return RedirectToAction("Index", "Post", new { area = "Admin"});
         }
+        [Authorize]
         [HttpPost]
         public IActionResult Logout()
         {
             _signInManager.SignOutAsync();
             _iNotyfService.Success("Usuário deslogado.");
             return RedirectToAction("Index", "Home", new {area = ""});
+        }
+        [HttpGet("AccessDenied")]
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
     }
 }
