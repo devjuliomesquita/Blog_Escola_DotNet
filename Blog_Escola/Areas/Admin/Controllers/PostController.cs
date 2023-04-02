@@ -56,6 +56,7 @@ namespace Blog_Escola.Areas.Admin.Controllers
             { 
                 Id = l.Id,
                 Title = l.Title,
+                ShortDescription = l.ShortDescription,
                 CreatedAt = l.CreatedAt,
                 Thumbnail = l.ThumbnailUrl,
                 AuthorName = l.ApplicationUser.FirstName + " " + l.ApplicationUser.LastName
