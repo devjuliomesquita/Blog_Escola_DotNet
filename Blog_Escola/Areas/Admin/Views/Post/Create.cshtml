@@ -33,11 +33,11 @@
                     </div>
                     <div class="col-4">
                         <div class="mb-4">
-                            <img src="~/Thumbnail/default-image.jpg" class="img-fluid" style="border-radius: 10px;" />
+                            <img src="~/Thumbnail/default-image.jpg" class="img-fluid" id="Thumbnail" style="border-radius: 10px;" />
                         </div>
                         <div class="">
                             <label for="formFile" class="form-label mb-2">Escolha uma foto de capa.</label>
-                            <input asp-for="Thumbnail" type="file" value="carregar" class="btn btn-outline-secondary btn-sm">
+                            <input asp-for="Thumbnail" type="file" class="btn btn-outline-secondary btn-sm custom-file">
                             @*<span asp-validation-for="Description" class="text-danger"></span>*@
                         </div>
                         
@@ -57,3 +57,12 @@
 
 </div>
 <!-- /.container-fluid -->
+@section Scripts{
+    <script>
+        $(".custom-file").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            document.getElementById("Thumbnail").src = window.URL.createObjectURL(this.files[0])
+        });
+    </script>
+}
