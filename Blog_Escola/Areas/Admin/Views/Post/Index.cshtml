@@ -44,11 +44,13 @@
                             </div>
                             <div class="row d-flex justify-content-center">
                                 <p class="">
-                                    <a class="btn btn-success "><i class="fa fa-upload"></i></a>
+                                    <a class="btn btn-success" data-bs-toggle="modal"><i class="fa fa-upload"></i></a>
                                     <a class="btn btn-warning "><i class="fa fa-edit"></i></a>
-                                    <form asp-action="Delete" asp-controller="Post" asp-area="Admin" asp-route-id="@post.Id" method="post">
+                                    <form asp-action="Delete" asp-controller="Post" asp-area="Admin" asp-route-id="@post.Id" method="post" onsubmit="return confirm('Realmente quer deletar este post?')">
                                         <button type="submit" class="btn btn-danger "><i class="fa fa-trash"></i></button>
                                     </form>
+                                    
+
                                     
                                 </p>
 
