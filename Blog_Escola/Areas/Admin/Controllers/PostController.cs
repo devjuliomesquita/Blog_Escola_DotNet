@@ -102,6 +102,26 @@ namespace Blog_Escola.Areas.Admin.Controllers
 
             return RedirectToAction("Index", "Post", new {area="Admin"});
         }
+        //Método Delete
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            //Encontrar o post
+            var post = await _context.Posts!.FirstOrDefaultAsync(p => p.Id == id);
+            //Pegar o Id do usuário
+            var loggedInUser = await _manager.Users.FirstOrDefaultAsync(l => l.UserName == User.Identity!.Name);
+            var loggedInUserRole = await _manager.GetRolesAsync(loggedInUser!);
+            //Testes
+            if (loggedInUserRole[0] == WebSiteRoles.WebSiteAdmin || loggedInUser.Id == post.ApplicationUserId)
+            {
+                _context.Posts!.Remove(post!);
+                await _context.SaveChangesAsync();
+                _iNotyfService.Warning("Post Apagado.");
+                return RedirectToAction("Index", "Post", new { area = "Admin" });
+            }
+            return View();
+        }
+
             //Upload da foto
         private string UploadImage(IFormFile formFile)
         {

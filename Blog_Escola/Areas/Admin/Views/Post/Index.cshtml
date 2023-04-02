@@ -46,7 +46,10 @@
                                 <p class="">
                                     <a class="btn btn-success "><i class="fa fa-upload"></i></a>
                                     <a class="btn btn-warning "><i class="fa fa-edit"></i></a>
-                                    <a class="btn btn-danger "><i class="fa fa-trash"></i></a>
+                                    <form asp-action="Delete" asp-controller="Post" asp-area="Admin" asp-route-id="@post.Id" method="post">
+                                        <button type="submit" class="btn btn-danger "><i class="fa fa-trash"></i></button>
+                                    </form>
+                                    
                                 </p>
 
                             </div>
