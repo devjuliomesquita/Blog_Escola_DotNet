@@ -1,8 +1,11 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Blog_Escola.Data;
+using Blog_Escola.Models;
 using Blog_Escola.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Blog_Escola.Areas.Admin.Controllers
 {
@@ -14,15 +17,18 @@ namespace Blog_Escola.Areas.Admin.Controllers
         private readonly INotyfService _iNotyfService;
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _environment;
+        private readonly UserManager<ApplicationUser> _manager;
         public PostController(
                                 INotyfService notyfService,
                                 ApplicationDbContext context,
-                                IWebHostEnvironment environment
+                                IWebHostEnvironment environment,
+                                UserManager<ApplicationUser> manager
             )
         {
             _iNotyfService = notyfService;
             _context = context;
             _environment = environment;
+            _manager = manager;
         }
         public IActionResult Index()
         {
@@ -37,16 +43,41 @@ namespace Blog_Escola.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreatePostVM createPostVM)
         {
+            //Confere se o Model está válido para a requisição
             if (!ModelState.IsValid) { return View(createPostVM); }
+            //Pegar o Id do usuário
+            var loggedInUser = await _manager.Users.FirstOrDefaultAsync(l => l.UserName == User.Identity!.Name);
+            //Criar o mapeamento do POST
+            var post = new Post();
+            post.Title = createPostVM.Title;
+            post.ShortDescription = createPostVM.ShortDescription;
+            post.Description = createPostVM.Description;
+            post.ApplicationUserId = loggedInUser!.Id;
+            //==>Testes
+            if (post.Title != null)
+            {
+                string slug = createPostVM.Title!.Trim();
+                slug = slug.Replace(" ", "-");
+                post.Slug = slug + Guid.NewGuid();
+            }
+            if (createPostVM.Thumbnail!= null)
+            {
+                post.ThumbnailUrl = UploadImage(createPostVM.Thumbnail);
+            }
+            //Criar na Base
+            await _context.Posts.AddAsync(post);
+            await _context.SaveChangesAsync();
+            //Notificações
+            _iNotyfService.Success("Post criado com sucesso.");
 
-            return View(createPostVM);
+            return RedirectToAction("Index", "Post", new {area="Admin"});
         }
             //Upload da foto
         private string UploadImage(IFormFile formFile)
         {
             string uniqueFileName = "";
-            var folderPath = Path.Combine(_environment.WebRootPath, "Thumbnails");
-            uniqueFileName = new Guid().ToString() + "_" + formFile.FileName;
+            var folderPath = Path.Combine(_environment.WebRootPath, "Thumbnail");
+            uniqueFileName = Guid.NewGuid().ToString() + "_" + formFile.FileName;
             var filePath = Path.Combine(folderPath, uniqueFileName);
             using (FileStream fileStream = System.IO.File.Create(filePath))
             {
