@@ -3,8 +3,8 @@
     ViewData["Title"] = "Index";
 }
 <!-- Begin Page Content -->
-<div class="container-fluid">
-    <a class="btn btn-primary mb-1" asp-action="Register" asp-controller="User" asp-area="Admin"><i class="fa-solid fa-plus"></i> Add Usuário</a>
+<div class="container-fluid mb-4">
+    <a class="btn btn-primary mb-1" asp-action="Register" asp-controller="User" asp-area="Admin"><i class="fa fa-user-plus"></i> Add Usuário</a>
     <!-- Page Heading -->
     <div class="card">
         <div class="card-header bg-primary" > 
@@ -35,7 +35,10 @@
                                 <a  class="btn btn-info"
                                     asp-action="ResetPassword"
                                     asp-controller="User"
-                                    asp-route-id="@user.Id">Mudar a senha</a>
+                                    asp-route-id="@user.Id">
+                                    Mudar a senha
+                                    <i class="fa fa-edit"></i>
+                                </a>
                             </td>
                         </tr>
                     }
