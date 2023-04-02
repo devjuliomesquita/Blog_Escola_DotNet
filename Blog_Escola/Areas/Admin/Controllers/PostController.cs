@@ -1,6 +1,7 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Blog_Escola.Data;
 using Blog_Escola.Models;
+using Blog_Escola.Utilites;
 using Blog_Escola.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -30,9 +31,37 @@ namespace Blog_Escola.Areas.Admin.Controllers
             _environment = environment;
             _manager = manager;
         }
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
-            return View();
+            //Inicializar uma lista de Posts
+            var listOfPosts = new List<Post>();
+            //Pegar o Id do usuário
+            var loggedInUser = await _manager.Users.FirstOrDefaultAsync(l => l.UserName == User.Identity!.Name);
+            var loggedInUserRole = await _manager.GetRolesAsync( loggedInUser! );
+            //=> Testes
+            if (loggedInUserRole[0] == WebSiteRoles.WebSiteAdmin)
+            {
+                listOfPosts = await _context.Posts!.Include(l => l.ApplicationUser).ToListAsync();
+            }
+            else
+            {
+                listOfPosts = await _context.Posts! .Include(l => l.ApplicationUser)
+                                                    .Where(l => l.ApplicationUser.Id == loggedInUser!.Id)
+                                                    .ToListAsync();
+            }
+
+            //Mapeando
+            var listOfPostVM = listOfPosts.Select(l => new PostVM() 
+            { 
+                Id = l.Id,
+                Title = l.Title,
+                CreatedAt = l.CreatedAt,
+                Thumbnail = l.ThumbnailUrl,
+                AuthorName = l.ApplicationUser.FirstName + " " + l.ApplicationUser.LastName
+            }).ToList();
+            return View(listOfPostVM);
+
         }
         [HttpGet]
         public IActionResult Create()
@@ -65,7 +94,7 @@ namespace Blog_Escola.Areas.Admin.Controllers
                 post.ThumbnailUrl = UploadImage(createPostVM.Thumbnail);
             }
             //Criar na Base
-            await _context.Posts.AddAsync(post);
+            await _context.Posts!.AddAsync(post);
             await _context.SaveChangesAsync();
             //Notificações
             _iNotyfService.Success("Post criado com sucesso.");
