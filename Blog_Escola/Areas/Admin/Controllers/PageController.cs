@@ -173,15 +173,15 @@ namespace Blog_Escola.Areas.Admin.Controllers
             return RedirectToAction("Index", "User", new { area = "Admin" });
         }
 
-        private string UploadImage(IFormFile file)
+        private string UploadImage(IFormFile formFile)
         {
             string uniqueFileName = "";
-            var folderPath = Path.Combine(_environment.WebRootPath, "thumbnails");
-            uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+            var folderPath = Path.Combine(_environment.WebRootPath, "Thumbnail");
+            uniqueFileName = Guid.NewGuid().ToString() + "_" + formFile.FileName;
             var filePath = Path.Combine(folderPath, uniqueFileName);
             using (FileStream fileStream = System.IO.File.Create(filePath))
             {
-                file.CopyTo(fileStream);
+                formFile.CopyTo(fileStream);
             }
             return uniqueFileName;
         }

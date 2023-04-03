@@ -1,4 +1,80 @@
-﻿@page
-@model Blog_Escola.Areas.Admin.Views.Page.AboutModel
+﻿@model Blog_Escola.ViewModels.PageVM
+
 @{
+    ViewData["Title"] = "Page About";
+}
+<!-- Begin Page Content -->
+<div class="container-fluid mb-4">
+    <a class="btn btn-primary mb-1" asp-action="Index" asp-controller="User" asp-area="Admin"><i class="fa fa-arrow-left"></i> Lista de Usuários </a>
+    <!-- Page Heading -->
+    <div class="card ">
+        <div class="card-header bg-primary">
+            <h4 class="card-title text-white">Edição: Página Sobre</h4>
+        </div>
+        <div class="card-body mb-2">
+            <form asp-action="About" asp-controller="Page" asp-area="Admin" enctype="multipart/form-data">
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="ThumbnailUrl" />
+                <div class="row">
+                    <div class="col-8">
+                        <div class="mb-2">
+                            <label>Título</label>
+                            <input type="text" asp-for="Title" class="form-control" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+                        <div class="mb-2">
+                            <label>Pequena Descrição</label>
+                            <input type="text" asp-for="ShortDescription" class="form-control" />
+                            <span asp-validation-for="ShortDescription" class="text-danger"></span>
+                        </div>
+                        <div class="mb-2">
+                            <label>Descrição</label>
+                            <textarea id="richEditor" type="text" asp-for="Description" class="form-control" rows="8"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="mb-4">
+                            @{
+                                if (Model.ThumbnailUrl == null)
+                                {
+                                    <img src="~/Thumbnail/default-image.jpg" class="img-fluid" id="Thumbnail" style="border-radius: 10px;" />
+                                }
+                                else
+                                {
+                                    <img src="~/Thumbnail/@Model.ThumbnailUrl" class="img-fluid" id="Thumbnail" style="border-radius: 10px;" />
+                                }
+                            }
+
+                        </div>
+                        <div class="">
+                            <label for="formFile" class="form-label mb-2">Escolha uma foto de capa.</label>
+                            <input asp-for="Thumbnail" type="file" class="btn btn-outline-secondary btn-sm custom-file">
+                            @*<span asp-validation-for="Description" class="text-danger"></span>*@
+                        </div>
+
+                    </div>
+                </div>
+                <div class="mb-2 m-auto">
+                    <button type="submit" class="btn btn-primary m-auto">Editar Post</button>
+                </div>
+            </form>
+
+        </div>
+
+
+    </div>
+
+
+
+</div>
+<!-- /.container-fluid -->
+@section Scripts{
+    <script>
+        $(".custom-file").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            document.getElementById("Thumbnail").src = window.URL.createObjectURL(this.files[0])
+        });
+    </script>
 }
