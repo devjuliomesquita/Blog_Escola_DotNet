@@ -1,14 +1,24 @@
-﻿@{
+﻿@model Blog_Escola.ViewModels.PageVM
+@{
     ViewData["Title"] = "About";
+    string pageThumbnail = "";
+    if(Model.ThumbnailUrl == null)
+    {
+        pageThumbnail = "/Blog/assets/img/about-bg.jpg";
+    }
+    else
+    {
+        pageThumbnail = "/Thumbnail/" + Model.ThumbnailUrl;
+    }
 }
 <!-- Page Header-->
-<header class="masthead" style="background-image: url('/Blog/assets/img/about-bg.jpg')">
+<header class="masthead" style="background-image: url(@pageThumbnail)">
     <div class="container position-relative px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="page-heading">
-                    <h1>Sobre mim</h1>
-                    <span class="subheading">Saiba um pouco mais sobre quem eu sou.</span>
+                    <h1>@Model.Title</h1>
+                    <span class="subheading">@Model.ShortDescription</span>
                 </div>
             </div>
         </div>
@@ -19,8 +29,7 @@
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
-                <p>Sou um desenvolvedor de software brasileiro focado em aplicativos Web e Mobile. Curioso, sedento de aprender e autodidata para adquirir conhecimento. Em meu tempo livre, costumo trabalhar em projetos voluntários, ajudar a comunidade técnica e outros desenvolvedores.</p>
-                <p>Minhas melhores habilidades são relacionadas com a plataforma .Net. Também possuo conhecimentos e habilidades para trabalhar com HTML, CSS, JavaScript e Angular.</p>
+                @Html.Raw(Model.Description)
                 
             </div>
         </div>

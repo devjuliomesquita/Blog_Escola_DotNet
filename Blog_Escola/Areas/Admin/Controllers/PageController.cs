@@ -40,7 +40,7 @@ namespace Blog_Escola.Areas.Admin.Controllers
             //Mapear o objeto
             var viewModel = new PageVM()
             {
-                Id = page.Id,
+                Id = page!.Id,
                 Title = page.Title,
                 ShortDescription = page.ShortDescription,
                 Description = page.Description,
