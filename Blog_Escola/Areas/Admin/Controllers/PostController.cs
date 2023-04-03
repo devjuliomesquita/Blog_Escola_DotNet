@@ -103,7 +103,7 @@ namespace Blog_Escola.Areas.Admin.Controllers
             return RedirectToAction("Index", "Post", new {area="Admin"});
         }
         //Método Delete
-        [HttpPost]
+        //[HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
             //Encontrar o post
@@ -169,7 +169,7 @@ namespace Blog_Escola.Areas.Admin.Controllers
             post.ShortDescription = createPostVM.ShortDescription;
             post.Description = createPostVM.Description;
             //post.ThumbnailUrl = createPostVM.ThumbnailUrl;
-            if (createPostVM.Thumbnail == null)
+            if (createPostVM.Thumbnail != null)
             {
                 post.ThumbnailUrl = UploadImage(createPostVM.Thumbnail);
             }
