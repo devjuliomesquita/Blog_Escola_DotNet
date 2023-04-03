@@ -121,8 +121,39 @@ namespace Blog_Escola.Areas.Admin.Controllers
             }
             return View();
         }
+        //Editar um post
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            //Encontrar o post
+            var post = await _context.Posts!.FirstOrDefaultAsync(p => p.Id==id);
+            //Teste se existe
+            if(post == null)
+            {
+                _iNotyfService.Warning("Post não encontrado");
+                return View();
+            }
+            //Pegar o Id do usuário e o tipo de usuário
+            var loggedInUser = await _manager.Users.FirstOrDefaultAsync(l => l.UserName == User.Identity!.Name);
+            var loggedInUserRole = await _manager.GetRolesAsync(loggedInUser!);
+            if (loggedInUserRole[0] != WebSiteRoles.WebSiteAdmin && loggedInUser.Id != post.ApplicationUserId )
+            {
+                _iNotyfService.Information("Sem altorização.");
+                return RedirectToAction("Index");
+            }
+            //Sem erros - mapear o objeto
+            var edit = new CreatePostVM()
+            {
+                Id = post.Id,
+                Title = post.Title,
+                ShortDescription = post.ShortDescription,
+                Description = post.Description,
+                ThumbnailUrl = post.ThumbnailUrl,
+            };
+            return View(edit);
+        } 
 
-            //Upload da foto
+        //=>Upload da foto
         private string UploadImage(IFormFile formFile)
         {
             string uniqueFileName = "";
