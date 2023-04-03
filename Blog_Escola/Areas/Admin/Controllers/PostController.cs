@@ -151,7 +151,33 @@ namespace Blog_Escola.Areas.Admin.Controllers
                 ThumbnailUrl = post.ThumbnailUrl,
             };
             return View(edit);
-        } 
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(CreatePostVM createPostVM)
+        {
+            //Vrificar se o formulário é válido
+            if (!ModelState.IsValid) { return View(createPostVM); }
+            //Encontrar o post
+            var post = await _context.Posts!.FirstOrDefaultAsync(p => p.Id == createPostVM.Id);
+            //Teste se existe
+            if (post == null)
+            {
+                _iNotyfService.Warning("Post não encontrado");
+                return View();
+            }
+            post.Title = createPostVM.Title;
+            post.ShortDescription = createPostVM.ShortDescription;
+            post.Description = createPostVM.Description;
+            //post.ThumbnailUrl = createPostVM.ThumbnailUrl;
+            if (createPostVM.Thumbnail == null)
+            {
+                post.ThumbnailUrl = UploadImage(createPostVM.Thumbnail);
+            }
+            //Carregamento no bando de dados do Entity
+            await _context.SaveChangesAsync();
+            _iNotyfService.Success("Post Atualizado.");
+            return RedirectToAction("Index", "Post", new {area="Admin"});
+        }
 
         //=>Upload da foto
         private string UploadImage(IFormFile formFile)
