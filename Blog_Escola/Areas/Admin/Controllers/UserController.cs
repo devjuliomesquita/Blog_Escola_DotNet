@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 
 namespace Blog_Escola.Areas.Admin.Controllers
 {
@@ -53,6 +54,7 @@ namespace Blog_Escola.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> ResetPassword(string id)
         {
+            //Encontrar o Usuário
             var existingUser = await _userManager.FindByIdAsync(id);
             if (existingUser == null)
             {
@@ -144,6 +146,27 @@ namespace Blog_Escola.Areas.Admin.Controllers
             }
             return View(registerVM);
            
+        }
+        public async Task<IActionResult> Delete(string id)
+        {
+            //Encontrar o Usuário
+            var existingUser = await _userManager.FindByIdAsync(id);
+            //Teste
+            if (existingUser == null)
+            {
+                _iNotyfService.Error("Usuário não encontrado.");
+                return View();
+            }
+
+            var loggedInUser = await _userManager.Users.FirstOrDefaultAsync(l => l.UserName == User.Identity!.Name);
+            var loggedInUserRole = await _userManager.GetRolesAsync(loggedInUser!);
+            if (loggedInUserRole[0] == WebSiteRoles.WebSiteAdmin)
+            {
+                await _userManager.DeleteAsync(existingUser);
+                _iNotyfService.Warning("Usuário Apagado.");
+                return RedirectToAction("Index", "User", new { area = "Admin" });
+            }
+            return View();
         }
         [HttpGet("Login")]
         public IActionResult Login()

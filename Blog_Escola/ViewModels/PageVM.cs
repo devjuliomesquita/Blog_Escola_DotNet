@@ -10,6 +10,6 @@ namespace Blog_Escola.ViewModels
         public string? ShortDescription { get; set; }
         public string? Description { get; set; }
         public string? ThumbnailUrl { get; set; }
-        public IFormFile Thumbnail { get; set; }
+        public IFormFile? Thumbnail { get; set; }
     }
 }

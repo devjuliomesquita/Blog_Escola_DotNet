@@ -36,8 +36,14 @@
                                     asp-action="ResetPassword"
                                     asp-controller="User"
                                     asp-route-id="@user.Id">
-                                    Mudar a senha
+                                    SENHA
                                     <i class="fa fa-edit"></i>
+                                </a>
+                                <a class="btn btn-danger"
+                                    asp-action="Delete"
+                                    asp-controller="User"
+                                    asp-route-id="@user.Id">
+                                    <i class="fa fa-trash"></i>
                                 </a>
                             </td>
                         </tr>
