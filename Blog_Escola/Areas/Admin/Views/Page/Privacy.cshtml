@@ -1,7 +1,7 @@
 ﻿@model Blog_Escola.ViewModels.PageVM
 
 @{
-    ViewData["Title"] = "Page About";
+    ViewData["Title"] = "Page Privacy";
 }
 <!-- Begin Page Content -->
 <div class="container-fluid mb-4">
@@ -9,10 +9,10 @@
     <!-- Page Heading -->
     <div class="card ">
         <div class="card-header bg-primary">
-            <h4 class="card-title text-white">Edição: Página Sobre</h4>
+            <h4 class="card-title text-white">Edição: Página Privacy</h4>
         </div>
         <div class="card-body mb-2">
-            <form asp-action="About" asp-controller="Page" asp-area="Admin" enctype="multipart/form-data">
+            <form asp-action="Privacy" asp-controller="Page" asp-area="Admin" enctype="multipart/form-data">
                 <input type="hidden" asp-for="Id" />
                 <input type="hidden" asp-for="ThumbnailUrl" />
                 <div class="row">
