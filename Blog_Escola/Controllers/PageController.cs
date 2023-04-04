@@ -55,9 +55,6 @@ namespace Blog_Escola.Controllers
             };
             return View(viewModel);
         }
-        public IActionResult Teste()
-        {
-            return View();
-        }
+
     }
 }
