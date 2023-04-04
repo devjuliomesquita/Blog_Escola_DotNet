@@ -4,10 +4,10 @@
 }
 <!-- Begin Page Content -->
 <div class="container-fluid mb-4">
-    <a class="btn btn-primary mb-1" asp-action="Register" asp-controller="User" asp-area="Admin"><i class="fa fa-user-plus"></i> Add Usuário</a>
+    <a class="btn btn-outline-secondary mb-1" asp-action="Register" asp-controller="User" asp-area="Admin"><i class="fa fa-user-plus"></i> Add Usuário</a>
     <!-- Page Heading -->
     <div class="card">
-        <div class="card-header bg-primary" > 
+        <div class="card-header bg-gradient-secondary" > 
             <h4 class="card-title text-white">Lista de Usuários</h4>
         </div>
         <div class="card-body">
@@ -32,14 +32,13 @@
                             <td>@user.Email</td>
                             <td>@user.Role</td>
                             <td>
-                                <a  class="btn btn-info"
+                                <a  class="btn btn-outline-dark m-1"
                                     asp-action="ResetPassword"
                                     asp-controller="User"
                                     asp-route-id="@user.Id">
-                                    SENHA
-                                    <i class="fa fa-edit"></i>
+                                    <i class="fa fa-key"></i>
                                 </a>
-                                <a class="btn btn-danger"
+                                <a class="btn btn-danger m-1"
                                     asp-action="Delete"
                                     asp-controller="User"
                                     asp-route-id="@user.Id">

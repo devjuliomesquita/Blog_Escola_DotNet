@@ -1,14 +1,24 @@
-﻿@{
+﻿@model Blog_Escola.ViewModels.PageVM
+@{
     ViewData["Title"] = "Contact";
+    string pageThumbnail = "";
+    if (Model.ThumbnailUrl == null)
+    {
+        pageThumbnail = "/Blog/assets/img/about-bg.jpg";
+    }
+    else
+    {
+        pageThumbnail = "/Thumbnail/" + Model.ThumbnailUrl;
+    }
 }
 <!-- Page Header-->
-<header class="masthead" style="background-image: url('/Blog/assets/img/contact-bg.jpg')">
+<header class="masthead" style="background-image: url(@pageThumbnail)">
     <div class="container position-relative px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="page-heading">
-                    <h1>Fale Comigo</h1>
-                    <span class="subheading">Gostou do que viu? Tem alguma dúvida?</span>
+                    <h1>@Model.Title</h1>
+                    <span class="subheading">@Model.ShortDescription</span>
                 </div>
             </div>
         </div>
@@ -19,7 +29,9 @@
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
-                <p>Preencha o formulário e descreva suas dúvidas e problemas!</p>
+                <p>@Model.Description</p>
+                <br />
+                <p>Preencha o formulário e descreva suas dúvidas!</p>
                 <div class="my-5">
                     <!-- * * * * * * * * * * * * * * *-->
                     <!-- * * SB Forms Contact Form * *-->
