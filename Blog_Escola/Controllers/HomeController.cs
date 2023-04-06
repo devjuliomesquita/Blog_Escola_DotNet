@@ -3,6 +3,8 @@ using Blog_Escola.ViewModels;
 using Blog_Escola.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
+using Microsoft.EntityFrameworkCore;
 
 namespace Blog_Escola.Controllers
 {
@@ -24,7 +26,7 @@ namespace Blog_Escola.Controllers
             vm.Title = setting[0].Title;
             vm.ShortDescription = setting[0].ShortDescription;
             vm.ThumbnailUrl = setting[0].ThumbnailUrl;
-            vm.Posts = _context.Posts!.ToList();
+            vm.Posts = _context.Posts!.Include(vmp => vmp.ApplicationUser ).ToList();
 
             
 
