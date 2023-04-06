@@ -32,7 +32,7 @@
             {
                 <!-- Post preview-->
                 <div class="post-preview">
-                    <a href="post.html">
+                    <a asp-action="Post" asp-controller="Blog" asp-route-Slug="@post.Slug">
                         <h2 class="post-title">@post.Title</h2>
                         <h3 class="post-subtitle">@post.ShortDescription</h3>
                     </a>
