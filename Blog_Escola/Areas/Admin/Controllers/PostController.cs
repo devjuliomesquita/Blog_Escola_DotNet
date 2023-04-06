@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using X.PagedList;
 
 namespace Blog_Escola.Areas.Admin.Controllers
 {
@@ -32,7 +33,7 @@ namespace Blog_Escola.Areas.Admin.Controllers
             _manager = manager;
         }
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? page)
         {
             //Inicializar uma lista de Posts
             var listOfPosts = new List<Post>();
@@ -61,7 +62,11 @@ namespace Blog_Escola.Areas.Admin.Controllers
                 Thumbnail = l.ThumbnailUrl,
                 AuthorName = l.ApplicationUser.FirstName + " " + l.ApplicationUser.LastName
             }).ToList();
-            return View(listOfPostVM);
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+
+            return View(await listOfPostVM.OrderByDescending(x => x.CreatedAt).ToPagedListAsync(pageNumber, pageSize));
 
         }
         [HttpGet]
