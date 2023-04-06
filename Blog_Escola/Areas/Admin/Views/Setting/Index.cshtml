@@ -1,4 +1,106 @@
-﻿@page
-@model Blog_Escola.Areas.Admin.Views.Setting.IndexModel
+﻿@model Blog_Escola.ViewModels.SettingVM
+
 @{
+    ViewData["Title"] = "Settings";
+}
+<!-- Begin Page Content -->
+<div class="container-fluid mb-4">
+    <a class="btn btn-outline-secondary mb-1" asp-action="Index" asp-controller="User" asp-area="Admin"><i class="fa fa-arrow-left"></i> Lista de Usuários </a>
+    <!-- Page Heading -->
+    <div class="card ">
+        <div class="card-header bg-gradient-secondary">
+            <h4 class="card-title text-white">Configurações</h4>
+        </div>
+        <div class="card-body mb-2">
+            <form asp-action="Index" asp-controller="Setting" asp-area="Admin" enctype="multipart/form-data">
+                <input type="hidden" asp-for="Id"/>
+                <div class="row">
+                    <div class="col-8">
+                        <div class="mb-2">
+                            <label>Nome do Site</label>
+                            <input type="text" asp-for="SiteName" class="form-control" />
+                            <span asp-validation-for="SiteName" class="text-danger"></span>
+                        </div>
+                        <div class="mb-2">
+                            <label>Título</label>
+                            <input type="text" asp-for="Title" class="form-control" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+                        <div class="mb-2">
+                            <label>Pequena Descrição</label>
+                            <input type="text" asp-for="ShortDescription" class="form-control" />
+                            <span asp-validation-for="ShortDescription" class="text-danger"></span>
+                        </div>
+                        <div>
+                            <h3>Mídias Sociais</h3>
+                        </div>
+                        <div class="mb-2">
+                            <label>Github</label>
+                            <input type="text" asp-for="GitHub" class="form-control" />
+                            <span asp-validation-for="GitHub" class="text-danger"></span>
+                        </div>
+                        <div class="mb-2">
+                            <label>LinkedIn</label>
+                            <input type="text" asp-for="LinkedIn" class="form-control" />
+                            <span asp-validation-for="LinkedIn" class="text-danger"></span>
+                        </div>
+                        <div class="mb-2">
+                            <label>E-Mail</label>
+                            <input type="text" asp-for="Gmail" class="form-control" />
+                            <span asp-validation-for="Gmail" class="text-danger"></span>
+                        </div>
+                        <div class="mb-2">
+                            <label>Whats App</label>
+                            <input type="text" asp-for="WhatsApp" class="form-control" />
+                            <span asp-validation-for="WhatsApp" class="text-danger"></span>
+                        </div>
+                        <div class="mb-2">
+                            <label>Portifólio</label>
+                            <input type="text" asp-for="Portifolio" class="form-control" />
+                            <span asp-validation-for="Portifolio" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="mb-4">
+                            @{
+                                if (Model.ThumbnailUrl == null)
+                                {
+                                    <img src="~/Thumbnail/default-image.jpg" class="img-fluid" id="Thumbnail" style="border-radius: 10px;" />
+                                }
+                                else
+                                {
+                                    <img src="~/Thumbnail/@Model.ThumbnailUrl" class="img-fluid" id="Thumbnail" style="border-radius: 10px;" />
+                                }
+                            }
+                        </div>
+                        <div class="">
+                            <label for="formFile" class="form-label mb-2">Escolha uma foto de capa.</label>
+                            <input asp-for="Thumbnail" type="file" class="btn btn-outline-secondary btn-sm custom-file">
+                            @*<span asp-validation-for="Description" class="text-danger"></span>*@
+                        </div>
+
+                    </div>
+                </div>
+                <div class="mb-2 m-auto">
+                    <button type="submit" class="btn btn-secondary m-auto">Salvar Configurações</button>
+                </div>
+            </form>
+
+        </div>
+
+
+    </div>
+
+
+
+</div>
+<!-- /.container-fluid -->
+@section Scripts{
+    <script>
+        $(".custom-file").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            document.getElementById("Thumbnail").src = window.URL.createObjectURL(this.files[0])
+        });
+    </script>
 }
