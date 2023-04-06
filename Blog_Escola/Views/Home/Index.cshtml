@@ -1,14 +1,24 @@
-﻿@{
+﻿@model Blog_Escola.ViewModels.HomeVM
+@{
     ViewData["Title"] = "Home Page";
+    string thumbnailUrl = "";
+    if(Model.ThumbnailUrl == "")
+    {
+        thumbnailUrl = "/Blog/assets/img/home-bg.jpg";
+    }
+    else
+    {
+        thumbnailUrl = "/Thumbnail/" + Model.ThumbnailUrl;
+    }
 }
 <!-- Page Header-->
-<header class="masthead" style="background-image: url('/Blog/assets/img/home-bg.jpg')">
+<header class="masthead" style="background-image: url('@thumbnailUrl')">
     <div class="container position-relative px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="site-heading">
-                    <h1>Escola DOTNET</h1>
-                    <span class="subheading">Estude conosco</span>
+                    <h1>@Model.Title</h1>
+                    <span class="subheading">@Model.ShortDescription</span>
                 </div>
             </div>
         </div>
@@ -72,7 +82,7 @@
             <!-- Divider-->
             <hr class="my-4" />
             <!-- Pager-->
-            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
+            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Outros Posts →</a></div>
         </div>
     </div>
 </div>
