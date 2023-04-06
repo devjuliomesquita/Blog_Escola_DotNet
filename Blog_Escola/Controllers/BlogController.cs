@@ -17,6 +17,7 @@ namespace Blog_Escola.Controllers
             _context = context;
             _notyfService = notyfService;
         }
+        [HttpGet("[controller]/{slug}")]
         public async Task<IActionResult> Post(string slug)
         {
             //Encontrar esse post
