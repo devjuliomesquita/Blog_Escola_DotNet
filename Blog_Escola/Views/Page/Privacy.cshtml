@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Privacy";
     string pageThumbnail = "";
-    if (Model.ThumbnailUrl == null)
+    if (Model.ThumbnailUrl == "")
     {
         pageThumbnail = "/Blog/assets/img/about-bg.jpg";
     }
