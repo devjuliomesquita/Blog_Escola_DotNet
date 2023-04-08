@@ -6,7 +6,12 @@
 Blog Escola DOTNET é uma aplicação full stack web e mobile que consiste em cadastros, edição e exclusão de artigos. Existe também a gerência de usuários entre Administrador e Author, onde o Administrador pode gerênciar outros usuários assim como os posts porém o Author poderá gerênciar apenas o seus posts.
 
 ## Layout mobile
-
+<div style="display: inline_block" align="center">
+  <img width=24% src="https://github.com/devjuliomesquita/Blog_Escola_DotNet/blob/master/Blog_Escola/wwwroot/Blog/assets/img/blob.inicial.cell.png"/>
+  <img width=24% src="https://github.com/devjuliomesquita/Blog_Escola_DotNet/blob/master/Blog_Escola/wwwroot/Blog/assets/img/blob.inicial.post.cell1.png"/>
+  <img width=24% src="https://github.com/devjuliomesquita/Blog_Escola_DotNet/blob/master/Blog_Escola/wwwroot/Blog/assets/img/blob.inicial.post.cell.png"/>
+  <img width=24% src="https://github.com/devjuliomesquita/Blog_Escola_DotNet/blob/master/Blog_Escola/wwwroot/Blog/assets/img/Blog.Login.cell.png"/>
+</div>
 
 ## Layout web
 <div style="display: inline_block" align="center">
@@ -17,7 +22,6 @@ Blog Escola DOTNET é uma aplicação full stack web e mobile que consiste em ca
   <img width=49% src="https://github.com/devjuliomesquita/Blog_Escola_DotNet/blob/master/Blog_Escola/wwwroot/Blog/assets/img/Blog.Admin.User.png"/>
   <img width=49% src="https://github.com/devjuliomesquita/Blog_Escola_DotNet/blob/master/Blog_Escola/wwwroot/Blog/assets/img/Blog.Admin.Confg. Pag.png"/>
 </div>
-
 
 # Tecnologias utilizadas
 ## Back end
