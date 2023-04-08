@@ -1,9 +1,9 @@
 # Blog Escola DOTNET 
-[![NPM](https://img.shields.io/npm/l/react)](https://github.com/devsuperior/sds1-wmazoni/blob/master/LICENSE) 
+[![NPM](https://img.shields.io/npm/l/react)](https://github.com/devjuliomesquita/Blog_Escola_DotNet/blob/master/LICENSE.txt) 
 
 # Sobre o projeto
 
-Blog Escola DOTNET é uma aplicação full stack web e mobile que consiste em uma pesquisa de preferência de games, onde os dados são coletados no app mobile, e depois são listados no app web, que também apresenta um dashboard com gráficos baseados nestes dados.
+Blog Escola DOTNET é uma aplicação full stack web e mobile que consiste em cadastros, edição e exclusão de artigos. Existe também a gerência de usuários entre Administrador e Author, onde o Administrador pode gerênciar outros usuários assim como os posts porém o Author poderá gerênciar apenas o seus posts.
 
 ## Layout mobile
 ![Mobile 1](https://github.com/acenelio/assets/raw/main/sds1/mobile1.png) ![Mobile 2](https://github.com/acenelio/assets/raw/main/sds1/mobile2.png)
