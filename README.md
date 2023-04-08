@@ -9,13 +9,13 @@ Blog Escola DOTNET é uma aplicação full stack web e mobile que consiste em ca
 
 
 ## Layout web
-<div style="margin: auto">
-  <img width=50% src="https://github.com/devjuliomesquita/Blog_Escola_DotNet/blob/master/Blog_Escola/wwwroot/Blog/assets/img/blob.inicial.png"/>
-  <img width=50% src="https://github.com/devjuliomesquita/Blog_Escola_DotNet/blob/master/Blog_Escola/wwwroot/Blog/assets/img/blob.inicial.post.png"/>
-  <img width=50% src="https://github.com/devjuliomesquita/Blog_Escola_DotNet/blob/master/Blog_Escola/wwwroot/Blog/assets/img/Blog.Login.png"/>
-  <img width=50% src="https://github.com/devjuliomesquita/Blog_Escola_DotNet/blob/master/Blog_Escola/wwwroot/Blog/assets/img/Blog.Admin.Post.png"/>
-  <img width=50% src="https://github.com/devjuliomesquita/Blog_Escola_DotNet/blob/master/Blog_Escola/wwwroot/Blog/assets/img/Blog.Admin.User.png"/>
-  <img width=50% src="https://github.com/devjuliomesquita/Blog_Escola_DotNet/blob/master/Blog_Escola/wwwroot/Blog/assets/img/Blog.Admin.Confg. Pag.png"/>
+<div style="display: inline_block" align="center">
+  <img width=49% src="https://github.com/devjuliomesquita/Blog_Escola_DotNet/blob/master/Blog_Escola/wwwroot/Blog/assets/img/blob.inicial.png"/>
+  <img width=49% src="https://github.com/devjuliomesquita/Blog_Escola_DotNet/blob/master/Blog_Escola/wwwroot/Blog/assets/img/blob.inicial.post.png"/>
+  <img width=49% src="https://github.com/devjuliomesquita/Blog_Escola_DotNet/blob/master/Blog_Escola/wwwroot/Blog/assets/img/Blog.Login.png"/>
+  <img width=49% src="https://github.com/devjuliomesquita/Blog_Escola_DotNet/blob/master/Blog_Escola/wwwroot/Blog/assets/img/Blog.Admin.Post.png"/>
+  <img width=49% src="https://github.com/devjuliomesquita/Blog_Escola_DotNet/blob/master/Blog_Escola/wwwroot/Blog/assets/img/Blog.Admin.User.png"/>
+  <img width=49% src="https://github.com/devjuliomesquita/Blog_Escola_DotNet/blob/master/Blog_Escola/wwwroot/Blog/assets/img/Blog.Admin.Confg. Pag.png"/>
 </div>
 
 
@@ -50,7 +50,6 @@ Blog_Escola_DotNet.sln
 
 # Autor
 
-Júlio César de Mesquita Camilo Martins
-
-https://www.linkedin.com/in/dev-julio-c-martins/
-https://portifolio-pessoal-tan.vercel.app/
+### Júlio César de Mesquita Camilo Martins
+- https://www.linkedin.com/in/dev-julio-c-martins/
+- https://portifolio-pessoal-tan.vercel.app/
